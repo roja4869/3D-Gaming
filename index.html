@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Enter the world of NEO-NEXUS: RECKONING. The ultimate futuristic cyberpunk multiplayer action shooter game. Play now and reclaim the digital edge.">
+    <meta name="keywords" content="cyberpunk, futuristic, 3d game, shooter, esports, online gaming, action, sci-fi">
+    <title>NEO-NEXUS: RECKONING | Official AAA Cyberpunk Gaming Site</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- GSAP for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+    
+    <!-- App Logic -->
+    <script src="app.js" defer></script>
+</head>
+<body class="cyber-dark">
+
+    <!-- Custom Cursor -->
+    <div id="custom-cursor" class="custom-cursor"></div>
+    <div id="custom-cursor-dot" class="custom-cursor-dot"></div>
+
+    <!-- Futuristic Bootscreen Preloader -->
+    <div id="preloader" class="preloader">
+        <div class="preloader-content">
+            <div class="glitch-logo" data-text="NEO-NEXUS">NEO-NEXUS</div>
+            <div class="loader-terminal">
+                <p class="term-line">>> INITIALIZING SYSTEM BOOT SEQUENCE...</p>
+                <p class="term-line">>> SECURE SHIELD ACTIVE... [OK]</p>
+                <p class="term-line">>> LOADING CORE DATA GRAPHICS... [OK]</p>
+                <p class="term-line">>> CONNECTING TO MATRIX NETWORK... [ESTABLISHED]</p>
+                <p class="term-line text-cyan">>> ALL OPERATIVES ONLINE.</p>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <div class="progress-percent" id="progress-percent">0%</div>
+        </div>
+    </div>
+
+    <!-- Audio Synth Controller -->
+    <div class="audio-controller">
+        <button id="audio-toggle" class="audio-btn" aria-label="Toggle Audio" title="Toggle Sci-Fi Synth Ambient">
+            <i class="fa-solid fa-volume-xmark"></i>
+            <span class="audio-status">MUTED</span>
+        </button>
+        <div class="audio-wave">
+            <span class="wave-bar"></span>
+            <span class="wave-bar"></span>
+            <span class="wave-bar"></span>
+            <span class="wave-bar"></span>
+        </div>
+    </div>
+
+    <!-- 3D Particle Canvas Background -->
+    <canvas id="canvas-particles" class="particles-bg"></canvas>
+
+    <!-- Animated Video Background -->
+    <div class="video-bg-container">
+        <video autoplay muted loop playsinline class="video-bg">
+            <source src="https://player.vimeo.com/external/371433846.sd.mp4?s=236da2f3c054f4d9b3c106753f8749db79f67a25&profile_id=139&oauth2_token_id=57447761" type="video/mp4">
+        </video>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo hover-effect">
+                <span class="logo-accent">NEO</span>-NEXUS
+            </a>
+            
+            <nav class="nav-menu" id="nav-menu">
+                <div class="nav-active-marker" id="nav-active-marker"></div>
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#operatives" class="nav-link">Operatives</a>
+                <a href="#simulations" class="nav-link">Simulations</a>
+                <a href="#gallery" class="nav-link">Gallery</a>
+                <a href="#arsenal" class="nav-link">Arsenal</a>
+                <a href="#commlog" class="nav-link">Comm-Log</a>
+                <a href="#connect" class="nav-link">Connect</a>
+            </nav>
+
+            <div class="nav-actions">
+                <!-- Theme Toggle Switch -->
+                <button id="theme-toggle" class="theme-btn hover-effect" aria-label="Toggle Light/Dark Theme">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                
+                <!-- Shopping Cart Icon Indicator -->
+                <button id="cart-toggle" class="cart-btn hover-effect" aria-label="Open Shopping Cart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-badge" id="cart-badge">0</span>
+                </button>
+
+                <!-- Mobile Menu Toggle (Hamburger) -->
+                <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation Menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN BODY SECTIONS -->
+    <main>
+
+        <!-- 1. Hero Section -->
+        <section id="home" class="section hero-section">
+            <!-- Dedicated Cinematic Video Background -->
+            <div class="hero-video-wrapper">
+                <video autoplay muted loop playsinline class="hero-video-raw" poster="assets/hero_bg.png">
+                    <source src="https://player.vimeo.com/external/371433846.sd.mp4?s=236da2f3c054f4d9b3c106753f8749db79f67a25&profile_id=139&oauth2_token_id=57447761" type="video/mp4">
+                </video>
+                <div class="hero-video-overlay"></div>
+            </div>
+            
+            <!-- Animated Cyber HUD & Gaming Elements -->
+            <div class="hero-hud-grid"></div>
+            <div class="hero-hud-element target-reticle">
+                <div class="reticle-circle"></div>
+                <div class="reticle-cross"></div>
+            </div>
+            <div class="hero-hud-element scanning-beam"></div>
+            <div class="hero-hud-element floating-neon-cube cube-1"></div>
+            <div class="hero-hud-element floating-neon-cube cube-2"></div>
+            
+            <div class="container hero-container-grid">
+                <!-- Left Side: Interactive Gaming Text Content -->
+                <div class="hero-text-col">
+                    <div class="cyber-badge reveal-item">CYBERNETIC AAA LAUNCH</div>
+                    <h1 class="hero-title glitch-text reveal-item" data-text="NEO-NEXUS">NEO-NEXUS</h1>
+                    <h2 class="hero-subtitle reveal-item">RECKONING IS HERE. RECLAIM THE DIGITAL EDGE.</h2>
+                    <p class="hero-desc reveal-item">Immerse yourself in a next-gen 3D multiplayer tactical cyber combat simulator. Build your syndicate, choose your augmented operative, and dominate the neural grid.</p>
+                    <div class="hero-actions reveal-item">
+                        <button class="btn btn-primary hover-sound play-trigger-btn">
+                            <span class="btn-glow"></span>
+                            <i class="fa-solid fa-play"></i> PLAY NOW
+                        </button>
+                        <button class="btn btn-secondary hover-sound trailer-trigger-btn">
+                            <i class="fa-solid fa-film"></i> WATCH TRAILER
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Right Side: Cinematic Character Frame -->
+                <div class="hero-visual-col reveal-item">
+                    <div class="hero-visual-frame glow-border-rgb hover-3d">
+                        <img src="assets/hero_character.png" alt="Neo-Nexus Operative Art" class="hero-visual-img">
+                        <div class="scanner-line"></div>
+                        <div class="visual-corner top-left"></div>
+                        <div class="visual-corner top-right"></div>
+                        <div class="visual-corner bottom-left"></div>
+                        <div class="visual-corner bottom-right"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Animated Scroll Down Indicator -->
+            <a href="#about" class="scroll-indicator" aria-label="Scroll Down">
+                <span class="mouse-icon">
+                    <span class="mouse-wheel"></span>
+                </span>
+                <span class="scroll-text">GRID CORRELATE</span>
+            </a>
+        </section>
+
+        <div class="section-separator"></div>
+
+        <!-- 2. About Game Section -->
+        <section id="about" class="section about-section">
+            <div class="container">
+                <div class="section-header text-center">
+                <h2 class="section-title">THE FRONTIER</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Experience gameplay mechanics built for ultra-performance combat and digital sabotage.</p>
+            </div>
+
+            <div class="about-grid">
+                <!-- Feature Card 1 -->
+                <div class="about-card glass-card hover-3d hover-sound">
+                    <div class="card-glow"></div>
+                    <div class="card-icon"><i class="fa-solid fa-microchip"></i></div>
+                    <h3 class="card-title">CYBERNETIC ARSENAL</h3>
+                    <p class="card-desc">Upgrade your weaponry with nano-engineered modifications, smart targeting, energy blades, and quantum cloaking nodes to outsmart enemy firewall defenses.</p>
+                    <div class="card-border"></div>
+                </div>
+
+                <!-- Feature Card 2 -->
+                <div class="about-card glass-card hover-3d hover-sound">
+                    <div class="card-glow"></div>
+                    <div class="card-icon"><i class="fa-solid fa-users-gear"></i></div>
+                    <h3 class="card-title">TACTICAL SYNERGY</h3>
+                    <p class="card-desc">Coordinate squad loadouts in real-time. Combine offensive firewall breaches with heavy shielding and field reconstruction drone support to lock down strategic grid nodes.</p>
+                    <div class="card-border"></div>
+                </div>
+
+                <!-- Feature Card 3 -->
+                <div class="about-card glass-card hover-3d hover-sound">
+                    <div class="card-glow"></div>
+                    <div class="card-icon"><i class="fa-solid fa-network-wired"></i></div>
+                    <h3 class="card-title">NEON METROPOLIS</h3>
+                    <p class="card-desc">Battle across dynamic open-grid cities featuring real-time destructible infrastructure, vertical grapple zip-lines, cyber-hacking hotspots, and high-stakes drop points.</p>
+                    <div class="card-border"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-separator"></div>
+
+        <!-- 3. Characters Section -->
+        <section id="operatives" class="section characters-section">
+            <div class="container">
+                <div class="section-header text-center">
+                <h2 class="section-title">SELECT YOUR OPERATIVE</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Meet the augmented specialists ready to deploy onto the digital battlefield.</p>
+            </div>
+
+            <div class="char-container">
+                <!-- Operatives List Tabs (Left Panel) -->
+                <div class="char-tabs">
+                    <button class="char-tab-btn active hover-sound" data-character="shadow">
+                        <span class="tab-index">01</span>
+                        <div class="tab-info">
+                            <span class="tab-name">SHADOW</span>
+                            <span class="tab-class">Cyber Ninja</span>
+                        </div>
+                    </button>
+                    <button class="char-tab-btn hover-sound" data-character="nova">
+                        <span class="tab-index">02</span>
+                        <div class="tab-info">
+                            <span class="tab-name">NOVA</span>
+                            <span class="tab-class">Hacker Mage</span>
+                        </div>
+                    </button>
+                    <button class="char-tab-btn hover-sound" data-character="jax">
+                        <span class="tab-index">03</span>
+                        <div class="tab-info">
+                            <span class="tab-name">JAX</span>
+                            <span class="tab-class">Heavy Enforcer</span>
+                        </div>
+                    </button>
+                    <button class="char-tab-btn hover-sound" data-character="valkyrie">
+                        <span class="tab-index">04</span>
+                        <div class="tab-info">
+                            <span class="tab-name">VALKYRIE</span>
+                            <span class="tab-class">Tactical Sniper</span>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- Character Display Panel (Middle/Right) -->
+                <div class="char-display glass-card">
+                    <!-- Character Visual (Middle) -->
+                    <div class="char-visual">
+                        <div class="char-image-container glow-border">
+                            <img src="assets/characters/shadow.png" alt="Shadow Operative" id="char-image" class="char-image">
+                            <div class="scanner-line"></div>
+                        </div>
+                    </div>
+
+                    <!-- Character Details (Right) -->
+                    <div class="char-details">
+                        <div class="char-specs">
+                            <div class="cyber-badge" id="char-codename">SYNDICATE: OBLIVION</div>
+                            <h3 class="char-name" id="char-name">SHADOW</h3>
+                            <p class="char-desc" id="char-desc">A stealth infiltrator master of energy blade fencing and active camouflage. Specializes in flanking hostile security squads and executing surgical strikes without warning.</p>
+                        </div>
+                        
+                        <!-- Operative Stats (Animated) -->
+                        <div class="char-stats">
+                            <h4 class="stats-header">AUGMENT SPECIFICATION:</h4>
+                            
+                            <div class="stat-bar-wrapper">
+                                <div class="stat-label">
+                                    <span>OFFENSE</span>
+                                    <span id="stat-val-offense">90%</span>
+                                </div>
+                                <div class="stat-track"><div class="stat-fill" id="stat-fill-offense" style="width: 90%;"></div></div>
+                            </div>
+                            
+                            <div class="stat-bar-wrapper">
+                                <div class="stat-label">
+                                    <span>DEFENSE</span>
+                                    <span id="stat-val-defense">50%</span>
+                                </div>
+                                <div class="stat-track"><div class="stat-fill" id="stat-fill-defense" style="width: 50%;"></div></div>
+                            </div>
+                            
+                            <div class="stat-bar-wrapper">
+                                <div class="stat-label">
+                                    <span>UTILITY TECH</span>
+                                    <span id="stat-val-tech">75%</span>
+                                </div>
+                                <div class="stat-track"><div class="stat-fill" id="stat-fill-tech" style="width: 75%;"></div></div>
+                            </div>
+                            
+                            <div class="stat-bar-wrapper">
+                                <div class="stat-label">
+                                    <span>SPEED / AGILITY</span>
+                                    <span id="stat-val-speed">95%</span>
+                                </div>
+                                <div class="stat-track"><div class="stat-fill" id="stat-fill-speed" style="width: 95%;"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-separator"></div>
+
+        <!-- 4. Game Modes Section -->
+        <section id="simulations" class="section modes-section">
+            <div class="container">
+                <div class="section-header text-center">
+                <h2 class="section-title">THE SIMULATIONS</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Pick your digital warzone parameters and configure squad dynamics.</p>
+            </div>
+
+            <div class="modes-grid">
+                <!-- Mode 1: Multiplayer -->
+                <div class="mode-card glass-card hover-3d hover-sound" data-mode="multiplayer">
+                    <div class="mode-bg bg-mp"></div>
+                    <div class="mode-content">
+                        <div class="mode-icon"><i class="fa-solid fa-gamepad"></i></div>
+                        <h3 class="mode-title">MULTIPLAYER</h3>
+                        <p class="mode-summary">Fast-paced 4v4 arena tactics. Secure critical data hubs, hack enemy mainframe firewalls, and dominate territorial grid zones.</p>
+                        <button class="btn btn-small btn-cyber">EXPAND DETAILS</button>
+                    </div>
+                </div>
+
+                <!-- Mode 2: Survival -->
+                <div class="mode-card glass-card hover-3d hover-sound" data-mode="survival">
+                    <div class="mode-bg bg-survival"></div>
+                    <div class="mode-content">
+                        <div class="mode-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                        <h3 class="mode-title">GRID SURVIVAL</h3>
+                        <p class="mode-summary">Cooperative horde survival. Hold your ground against progressive waves of corrupted AI nodes, sentinel bots, and network cleaners.</p>
+                        <button class="btn btn-small btn-cyber">EXPAND DETAILS</button>
+                    </div>
+                </div>
+
+                <!-- Mode 3: Battle Royale -->
+                <div class="mode-card glass-card hover-3d hover-sound" data-mode="royale">
+                    <div class="mode-bg bg-royale"></div>
+                    <div class="mode-content">
+                        <div class="mode-icon"><i class="fa-solid fa-circle-nodes"></i></div>
+                        <h3 class="mode-title">NEXUS ROYALE</h3>
+                        <p class="mode-summary">100 augmented operatives deploy onto a shrinking mega-city map. Scavenge upgrades, hack security relays, and emerge as the sole survivor.</p>
+                        <button class="btn btn-small btn-cyber">EXPAND DETAILS</button>
+                    </div>
+                </div>
+
+                <!-- Mode 4: Zombie -->
+                <div class="mode-card glass-card hover-3d hover-sound" data-mode="zombie">
+                    <div class="mode-bg bg-zombie"></div>
+                    <div class="mode-content">
+                        <div class="mode-icon"><i class="fa-solid fa-biohazard"></i></div>
+                        <h3 class="mode-title">INFECTION VECTOR</h3>
+                        <p class="mode-summary">Survive the bio-digital nanite outbreak. Avoid infected cyber-zombies, secure quarantine grid zones, and download cure protocols before corruption reaches 100%.</p>
+                        <button class="btn btn-small btn-cyber">EXPAND DETAILS</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-separator"></div>
+
+        <!-- 5. Gallery Section -->
+        <section id="gallery" class="section gallery-section">
+            <div class="container">
+                <div class="section-header text-center">
+                <h2 class="section-title">VISUAL ARCHIVES</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Stunning high-fidelity in-engine footage captured across the cyber grid.</p>
+            </div>
+
+            <div class="gallery-grid">
+                <!-- Screenshot 1 -->
+                <div class="gallery-item glow-border hover-sound" data-index="0" data-caption="NEON METROPOLIS DOWNTOWN GRID">
+                    <img src="assets/gallery/screenshot1.png" alt="Neon Metropolis" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <i class="fa-solid fa-magnifying-glass-plus"></i>
+                        <span class="gallery-caption">NEON METROPOLIS</span>
+                    </div>
+                </div>
+
+                <!-- Screenshot 2 -->
+                <div class="gallery-item glow-border hover-sound" data-index="1" data-caption="TACTICAL EXOSUIT ENGAGEMENT IN URBAN WARZONE">
+                    <img src="assets/gallery/screenshot2.png" alt="Mecha Combat" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <i class="fa-solid fa-magnifying-glass-plus"></i>
+                        <span class="gallery-caption">MECHA COMBAT</span>
+                    </div>
+                </div>
+
+                <!-- Screenshot 3 -->
+                <div class="gallery-item glow-border hover-sound" data-index="2" data-caption="RETRO-FUTURE SOCIAL HACKING LOUNGE">
+                    <img src="assets/gallery/screenshot3.png" alt="Starship Hangar" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <i class="fa-solid fa-magnifying-glass-plus"></i>
+                        <span class="gallery-caption">SPACECRAFT HANGAR</span>
+                    </div>
+                </div>
+
+                <!-- Screenshot 4 -->
+                <div class="gallery-item glow-border hover-sound" data-index="3" data-caption="SECTOR 9 CYBERPUNKBROW CAFE UNDERBELLYS">
+                    <img src="assets/gallery/screenshot4.png" alt="Cyberpunk Lounge" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <i class="fa-solid fa-magnifying-glass-plus"></i>
+                        <span class="gallery-caption">UNDERGROUND LOUNGE</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-separator"></div>
+
+        <!-- 6. Trailer Section -->
+        <section id="trailer" class="section trailer-section">
+            <div class="container">
+                <div class="section-header text-center">
+                <h2 class="section-title">CINEMATIC TRAILER</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Experience the official game trailer loop and prepare for the drop.</p>
+            </div>
+
+            <div class="video-container-wrapper glow-border">
+                <div class="video-frame">
+                    <!-- YouTube video embed with cyberpunk parameters (autoplay, muted, controls, loop) -->
+                    <iframe 
+                        id="trailer-iframe"
+                        src="https://www.youtube.com/embed/8X2kIfS6fb8?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=8X2kIfS6fb8&controls=1&showinfo=0&rel=0" 
+                        title="NEO-NEXUS Cinematic Trailer" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-separator"></div>
+
+        <!-- 7. Store Section -->
+        <section id="arsenal" class="section store-section">
+            <div class="container">
+                <div class="section-header text-center">
+                <h2 class="section-title">NEXUS ARSENAL</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Equip your setup and pick your digital entry access editions.</p>
+            </div>
+
+            <!-- Category: Hardware Accessories -->
+            <h3 class="store-category-title text-cyan"><i class="fa-solid fa-microchip"></i> PHYSICAL UPGRADES</h3>
+            <div class="store-grid accessories-grid">
+                <!-- Accessory 1 -->
+                <div class="store-card glass-card hover-3d hover-sound" data-id="mouse" data-name="Nexus RGB Gaming Mouse" data-price="79" data-category="Hardware">
+                    <div class="store-card-image">
+                        <img src="assets/store/mouse.png" alt="Nexus RGB Gaming Mouse">
+                    </div>
+                    <div class="store-card-info">
+                        <h4 class="product-title">NEXUS RGB MOUSE</h4>
+                        <p class="product-desc">16,000 DPI sensor, custom gaming switches, neon RGB outline stripes.</p>
+                        <div class="product-footer">
+                            <span class="product-price">$79.00</span>
+                            <button class="btn btn-small btn-primary add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> ADD TO CART</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accessory 2 -->
+                <div class="store-card glass-card hover-3d hover-sound" data-id="keyboard" data-name="Mechanical Cyber Keyboard" data-price="149" data-category="Hardware">
+                    <div class="store-card-image">
+                        <img src="assets/store/keyboard.png" alt="Mechanical Cyber Keyboard">
+                    </div>
+                    <div class="store-card-info">
+                        <h4 class="product-title">MECHANICAL CYBER KEYBOARD</h4>
+                        <p class="product-desc">Linear switch keys, metallic framework, individual key glowing neon matrix.</p>
+                        <div class="product-footer">
+                            <span class="product-price">$149.00</span>
+                            <button class="btn btn-small btn-primary add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> ADD TO CART</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accessory 3 -->
+                <div class="store-card glass-card hover-3d hover-sound" data-id="headset" data-name="Futuristic Gaming Headset" data-price="129" data-category="Hardware">
+                    <div class="store-card-image">
+                        <img src="assets/store/headset.png" alt="Futuristic Gaming Headset">
+                    </div>
+                    <div class="store-card-info">
+                        <h4 class="product-title">FUTURISTIC GAMING HEADSET</h4>
+                        <p class="product-desc">7.1 spatial neural sound, custom haptics feedback, cyan ring illumination.</p>
+                        <div class="product-footer">
+                            <span class="product-price">$129.00</span>
+                            <button class="btn btn-small btn-primary add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> ADD TO CART</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accessory 4 -->
+                <div class="store-card glass-card hover-3d hover-sound" data-id="vr" data-name="Next-Gen VR Visor" data-price="299" data-category="Hardware">
+                    <div class="store-card-image">
+                        <img src="assets/store/vr_headset.png" alt="Next-Gen VR Visor">
+                    </div>
+                    <div class="store-card-info">
+                        <h4 class="product-title">NEXT-GEN VR VISOR</h4>
+                        <p class="product-desc">120Hz micro-OLED display, high tracking spatial sensors, full eye track.</p>
+                        <div class="product-footer">
+                            <span class="product-price">$299.00</span>
+                            <button class="btn btn-small btn-primary add-to-cart-btn"><i class="fa-solid fa-cart-plus"></i> ADD TO CART</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category: Digital Game Editions -->
+            <h3 class="store-category-title text-magenta"><i class="fa-solid fa-compact-disc"></i> DIGITAL ACCESS EDITIONS</h3>
+            <div class="pricing-grid">
+                <!-- Pricing Card 1 -->
+                <div class="pricing-card glass-card hover-3d hover-sound" data-id="standard" data-name="NEO-NEXUS Standard Edition" data-price="59" data-category="Digital">
+                    <div class="pricing-accent cyan"></div>
+                    <h4 class="pricing-edition">STANDARD ACCESS</h4>
+                    <div class="pricing-cost">$59.00</div>
+                    <ul class="pricing-perks">
+                        <li><i class="fa-solid fa-check"></i> Base Simulation Access</li>
+                        <li><i class="fa-solid fa-check"></i> 4 Operative Unlocks</li>
+                        <li><i class="fa-solid fa-check"></i> Cyber Ninja Skin Pack</li>
+                        <li class="disabled"><i class="fa-solid fa-xmark"></i> Season Pass Access</li>
+                        <li class="disabled"><i class="fa-solid fa-xmark"></i> High-Fi Digital Soundtrack</li>
+                    </ul>
+                    <button class="btn btn-primary buy-now-btn">BUY STANDARD</button>
+                </div>
+
+                <!-- Pricing Card 2 (Recommended) -->
+                <div class="pricing-card glass-card featured hover-3d hover-sound" data-id="deluxe" data-name="NEO-NEXUS Deluxe Edition" data-price="89" data-category="Digital">
+                    <div class="pricing-tag">RECOMMENDED</div>
+                    <div class="pricing-accent purple"></div>
+                    <h4 class="pricing-edition">DELUXE LICENSE</h4>
+                    <div class="pricing-cost">$89.00</div>
+                    <ul class="pricing-perks">
+                        <li><i class="fa-solid fa-check"></i> Base Simulation Access</li>
+                        <li><i class="fa-solid fa-check"></i> 4 Operative Unlocks</li>
+                        <li><i class="fa-solid fa-check"></i> Cyber Ninja & Hacker Skins</li>
+                        <li><i class="fa-solid fa-check"></i> Year 1 Season Pass DLC</li>
+                        <li><i class="fa-solid fa-check"></i> High-Fi Digital Soundtrack</li>
+                    </ul>
+                    <button class="btn btn-primary btn-purple buy-now-btn">BUY DELUXE</button>
+                </div>
+
+                <!-- Pricing Card 3 -->
+                <div class="pricing-card glass-card hover-3d hover-sound" data-id="ultimate" data-name="NEO-NEXUS Ultimate Syndicate Edition" data-price="119" data-category="Digital">
+                    <div class="pricing-accent pink"></div>
+                    <h4 class="pricing-edition">SYNDICATE LEVEL</h4>
+                    <div class="pricing-cost">$119.00</div>
+                    <ul class="pricing-perks">
+                        <li><i class="fa-solid fa-check"></i> Base Simulation Access</li>
+                        <li><i class="fa-solid fa-check"></i> All Augmented Skins Unlocked</li>
+                        <li><i class="fa-solid fa-check"></i> Year 1 & 2 Season Passes</li>
+                        <li><i class="fa-solid fa-check"></i> Digital Artbook & Soundtrack</li>
+                        <li><i class="fa-solid fa-check"></i> 48-Hour Early Launch Access</li>
+                    </ul>
+                    <button class="btn btn-primary btn-pink buy-now-btn">BUY ULTIMATE</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-separator"></div>
+
+        <!-- 8. Reviews Section -->
+        <section id="commlog" class="section reviews-section">
+            <div class="container">
+                <div class="section-header text-center">
+                <h2 class="section-title">COMS TRANSMISSION</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Read live signals received from verified grid beta-testers.</p>
+            </div>
+
+            <!-- Testimonial Slider Wrapper -->
+            <div class="reviews-slider-container">
+                <div class="reviews-wrapper" id="reviews-wrapper">
+                    <!-- Review 1 -->
+                    <div class="review-card glass-card hover-sound">
+                        <div class="review-header">
+                            <div class="reviewer-info">
+                                <span class="reviewer-name">V01D_WALKER</span>
+                                <span class="reviewer-tag">Syndicate Leader</span>
+                            </div>
+                            <div class="reviewer-stars">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <p class="review-text">"The spatial audio synth engine combined with the 3D visual responsiveness is absolutely insane. Selecting and customization of Shadow's augments makes tactical operations feel deep and engaging."</p>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="review-card glass-card hover-sound">
+                        <div class="review-header">
+                            <div class="reviewer-info">
+                                <span class="reviewer-name">CYBER_PHREAK</span>
+                                <span class="reviewer-tag">Tactical Specialist</span>
+                            </div>
+                            <div class="reviewer-stars">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <p class="review-text">"Grid Survival mode is brutal. Coordinating shield deployments with Nova's digital barrier nodes requires perfect timing. Standard game loops don't come close to this."</p>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="review-card glass-card hover-sound">
+                        <div class="review-header">
+                            <div class="reviewer-info">
+                                <span class="reviewer-name">N3ON_BLAD3</span>
+                                <span class="reviewer-tag">Pro Cyber Leaguer</span>
+                            </div>
+                            <div class="reviewer-stars">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                            </div>
+                        </div>
+                        <p class="review-text">"Sleek and highly optimized interfaces. The latency compensation feels top tier during testing, and the verticality of maps is unlike any other Battle Royale game out there."</p>
+                    </div>
+                </div>
+
+                <!-- Slider Indicators -->
+                <div class="slider-controls">
+                    <button class="slider-btn prev-btn hover-sound" id="review-prev" aria-label="Previous Testimonial"><i class="fa-solid fa-chevron-left"></i></button>
+                    <div class="slider-dots" id="slider-dots">
+                        <span class="slider-dot active"></span>
+                        <span class="slider-dot"></span>
+                        <span class="slider-dot"></span>
+                    </div>
+                    <button class="slider-btn next-btn hover-sound" id="review-next" aria-label="Next Testimonial"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-separator"></div>
+
+        <!-- 9. Contact Section -->
+        <section id="connect" class="section contact-section">
+            <div class="container">
+                <div class="section-header text-center">
+                <h2 class="section-title">ESTABLISH CONNECTION</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Link your terminal to the syndicate hub for critical security clearances.</p>
+            </div>
+
+            <div class="contact-grid">
+                <!-- Connect Info -->
+                <div class="contact-info glass-card">
+                    <h3 class="info-title">GRID COORDINATES</h3>
+                    <p class="info-desc">Do you have data queries, feedback protocols, or sponsorship inquiries? Ping our terminal networks directly.</p>
+                    
+                    <div class="info-items">
+                        <div class="info-item">
+                            <div class="info-icon"><i class="fa-solid fa-satellite-dish"></i></div>
+                            <div>
+                                <h4 class="item-label">Main Relay Node</h4>
+                                <p class="item-val">nexus-hq.network.cyber</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                            <div>
+                                <h4 class="item-label">Encrypted Terminal</h4>
+                                <p class="item-val">+1 (888) NEO-NXUS</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Glowing Social Links -->
+                    <div class="social-networks">
+                        <h4 class="social-title">JOIN SYNDICATE DEPLOYMENT</h4>
+                        <div class="social-row">
+                            <a href="https://discord.gg/neonexus" target="_blank" rel="noopener noreferrer" class="social-link discord hover-sound" title="Discord Guild"><i class="fa-brands fa-discord"></i></a>
+                            <a href="https://twitch.tv/neonexus" target="_blank" rel="noopener noreferrer" class="social-link twitch hover-sound" title="Twitch Channel"><i class="fa-brands fa-twitch"></i></a>
+                            <a href="https://youtube.com/neonexus" target="_blank" rel="noopener noreferrer" class="social-link youtube hover-sound" title="YouTube Channel"><i class="fa-brands fa-youtube"></i></a>
+                            <a href="https://instagram.com/neonexus" target="_blank" rel="noopener noreferrer" class="social-link instagram hover-sound" title="Instagram Cyber Feed"><i class="fa-brands fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="contact-form-container glass-card">
+                    <form id="cyber-contact-form" class="cyber-form" novalidate>
+                        <div class="form-group">
+                            <label for="contact-username" class="form-label">OPERATIVE SIGNATURE</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-signature"></i>
+                                <input type="text" id="contact-username" placeholder="e.g. V01D_WALKER" required>
+                            </div>
+                            <span class="error-msg" id="username-error">Required field (Characters only)</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contact-email" class="form-label">NEURAL NET MAIL</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-envelope"></i>
+                                <input type="email" id="contact-email" placeholder="username@matrix.net" required>
+                            </div>
+                            <span class="error-msg" id="email-error">Invalid neural link address</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contact-message" class="form-label">TRANSMISSION ENCODING</label>
+                            <div class="input-wrapper text-area-wrapper">
+                                <i class="fa-solid fa-message"></i>
+                                <textarea id="contact-message" rows="4" placeholder="Enter transmission coordinates here..." required></textarea>
+                            </div>
+                            <span class="error-msg" id="message-error">Transmission body cannot be blank</span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block hover-sound" id="btn-submit">
+                            <span class="btn-glow"></span>
+                            <span class="btn-text">SEND TRANSMISSION</span>
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <div class="section-separator"></div>
+
+    <!-- 10. Footer Section -->
+    <footer class="footer">
+        <div class="footer-container container">
+            <div class="footer-brand">
+                <a href="#home" class="footer-logo hover-effect"><span class="logo-accent">NEO</span>-NEXUS</a>
+                <p class="footer-tagline">DOMINATE THE NEURAL NET. DEFEND THE SYNAPSE.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h4 class="footer-heading">NAVIGATION</h4>
+                <div class="footer-link-grid">
+                    <a href="#home" class="footer-link hover-sound">HOME</a>
+                    <a href="#about" class="footer-link hover-sound">ABOUT</a>
+                    <a href="#operatives" class="footer-link hover-sound">OPERATIVES</a>
+                    <a href="#simulations" class="footer-link hover-sound">SIMULATIONS</a>
+                    <a href="#gallery" class="footer-link hover-sound">GALLERY</a>
+                    <a href="#arsenal" class="footer-link hover-sound">ARSENAL</a>
+                    <a href="#commlog" class="footer-link hover-sound">REVIEWS</a>
+                    <a href="#connect" class="footer-link hover-sound">CONNECT</a>
+                </div>
+            </div>
+
+            <div class="footer-legal">
+                <h4 class="footer-heading">LEGAL DEPLOYMENT</h4>
+                <a href="#" class="footer-link hover-sound">TERMS OF GRID SERVICE</a>
+                <a href="#" class="footer-link hover-sound">COOKIE ENCRYPTION</a>
+                <a href="#" class="footer-link hover-sound">PRIVACY ARCHIVES</a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container footer-bottom-flex">
+                <p class="copyright">&copy; 2026 NEO-NEXUS NETWORKS. ALL CYBERNETIC RIGHTS RESERVED.</p>
+                <p class="terminal-footer">SYS_V2026.05.26 // ENCRYPT_AES_256</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- DYNAMIC POPUPS & OVERLAYS -->
+
+    <!-- Shopping Cart Drawer (Slide-out) -->
+    <div class="cart-drawer-overlay" id="cart-drawer-overlay"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-header">
+            <h3 class="cart-title"><i class="fa-solid fa-cart-shopping"></i> CART INDEX</h3>
+            <button class="cart-close hover-sound" id="cart-close" aria-label="Close Shopping Cart"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-items" id="cart-items-container">
+            <!-- Populated dynamically via JS -->
+            <div class="cart-empty-msg">
+                <i class="fa-solid fa-box-open"></i>
+                <p>NO HARDWARE OR DIGITALS ENROLLED.</p>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total-row">
+                <span>TOTAL ARSENAL VALUE:</span>
+                <span class="cart-subtotal" id="cart-subtotal">$0.00</span>
+            </div>
+            <button class="btn btn-primary btn-block checkout-btn hover-sound" id="cart-checkout-btn">
+                <span class="btn-glow"></span>
+                <span>SECURE CHECKOUT</span>
+                <i class="fa-solid fa-lock"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Secure Checkout Modal -->
+    <div class="modal-overlay" id="checkout-modal-overlay">
+        <div class="checkout-modal glass-card animate-modal">
+            <button class="modal-close hover-sound" id="checkout-close" aria-label="Close Modal"><i class="fa-solid fa-xmark"></i></button>
+            <div class="checkout-grid">
+                <!-- Payment Setup Details -->
+                <div class="checkout-form-panel">
+                    <h3 class="checkout-heading"><i class="fa-solid fa-shield-halved text-cyan"></i> ENCRYPTED BILLING</h3>
+                    
+                    <div class="payment-tabs">
+                        <button class="payment-tab active hover-sound" data-method="card"><i class="fa-solid fa-credit-card"></i> CREDIT CARD</button>
+                        <button class="payment-tab hover-sound" data-method="paypal"><i class="fa-brands fa-paypal"></i> PAYPAL</button>
+                        <button class="payment-tab hover-sound" data-method="crypto"><i class="fa-solid fa-coins"></i> CRYPTO</button>
+                    </div>
+
+                    <!-- Method Content: Card -->
+                    <div class="payment-content active" id="method-card">
+                        <form id="credit-card-form" class="cyber-form">
+                            <div class="form-group">
+                                <label for="cc-number" class="form-label">CARD NUMBER</label>
+                                <input type="text" id="cc-number" class="cc-input" placeholder="•••• •••• •••• ••••" maxlength="19" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cc-name" class="form-label">OPERATIVE NAME</label>
+                                <input type="text" id="cc-name" placeholder="IDENTIFICATION SIGNATURE" required>
+                            </div>
+                            <div class="form-row-2">
+                                <div class="form-group">
+                                    <label for="cc-expiry" class="form-label">EXPIRY</label>
+                                    <input type="text" id="cc-expiry" placeholder="MM/YY" maxlength="5" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cc-cvv" class="form-label">CVV</label>
+                                    <input type="password" id="cc-cvv" placeholder="•••" maxlength="3" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block hover-sound" id="btn-submit-payment">
+                                <span class="btn-glow"></span>
+                                <span>INITIALIZE PAYMENT</span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Method Content: PayPal -->
+                    <div class="payment-content text-center" id="method-paypal">
+                        <i class="fa-brands fa-paypal paypal-icon"></i>
+                        <p class="paypal-desc">Authorize purchase via secure PayPal redirection servers.</p>
+                        <button class="btn btn-primary btn-block hover-sound" id="paypal-submit">
+                            <span class="btn-glow"></span>
+                            <span>REDIRECT TO PAYPAL</span>
+                        </button>
+                    </div>
+
+                    <!-- Method Content: Crypto -->
+                    <div class="payment-content text-center" id="method-crypto">
+                        <i class="fa-solid fa-wallet crypto-icon"></i>
+                        <p class="crypto-desc">Transfer exact pricing matrix value in SOL/BTC to the secure wallet address:</p>
+                        <div class="crypto-wallet-box glow-border">
+                            <span id="wallet-address">N3xUS8571E6e1A4914263B9fE672D9D29</span>
+                            <button class="copy-wallet-btn hover-sound" id="copy-wallet" title="Copy Wallet Address"><i class="fa-solid fa-copy"></i></button>
+                        </div>
+                        <span id="copy-feedback" class="copy-feedback">Wallet copied to clipboard!</span>
+                        <button class="btn btn-primary btn-block hover-sound" id="crypto-submit">
+                            <span class="btn-glow"></span>
+                            <span>CONFIRM TRANS-MATRIX</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 3D Card Interactive Preview -->
+                <div class="checkout-preview-panel">
+                    <h3 class="checkout-heading">BILLING CARD MATRIX</h3>
+                    <div class="cc-preview-card" id="interactive-cc-card">
+                        <div class="cc-front">
+                            <div class="cc-chip"></div>
+                            <div class="cc-brand"><i class="fa-solid fa-shield-halved"></i> NEO</div>
+                            <div class="cc-number-display" id="preview-cc-number">•••• •••• •••• ••••</div>
+                            <div class="cc-flex-row">
+                                <div>
+                                    <div class="cc-label">CARD HOLDER</div>
+                                    <div class="cc-name-display" id="preview-cc-name">OPERATIVE SIGNATURE</div>
+                                </div>
+                                <div>
+                                    <div class="cc-label">VALID THRU</div>
+                                    <div class="cc-expiry-display" id="preview-cc-expiry">MM/YY</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cc-back">
+                            <div class="cc-magnetic-stripe"></div>
+                            <div class="cc-cvv-stripe">
+                                <div class="cc-label text-right">CVV</div>
+                                <div class="cc-cvv-display" id="preview-cc-cvv">•••</div>
+                            </div>
+                            <div class="cc-seal">ENCRYPT_AES_256</div>
+                        </div>
+                    </div>
+                    <div class="payment-order-summary glass-card">
+                        <h4 class="summary-title">TRANSACTION MATRIX</h4>
+                        <div class="summary-row">
+                            <span>Subtotal:</span>
+                            <span id="summary-subtotal">$0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Tax Matrix (5%):</span>
+                            <span id="summary-tax">$0.00</span>
+                        </div>
+                        <div class="summary-row total-row">
+                            <span>Matrix Total:</span>
+                            <span id="summary-total" class="text-cyan">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Mode Expansion Modal -->
+    <div class="modal-overlay" id="mode-modal-overlay">
+        <div class="mode-modal glass-card animate-modal" id="mode-modal-content">
+            <button class="modal-close hover-sound" id="mode-modal-close" aria-label="Close Modal"><i class="fa-solid fa-xmark"></i></button>
+            <div class="mode-modal-grid">
+                <div class="mode-modal-visual" id="mode-modal-visual-bg">
+                    <div class="mode-modal-glow"></div>
+                    <div class="mode-modal-badge" id="mode-modal-tag">MULTIPLAYER SIM</div>
+                </div>
+                <div class="mode-modal-details">
+                    <h3 class="mode-modal-title" id="mode-modal-title">TEAM DEATHMATCH</h3>
+                    <p class="mode-modal-desc" id="mode-modal-desc">Detailed gameplay instructions go here.</p>
+                    
+                    <div class="mode-specs">
+                        <h4 class="specs-heading">SIMULATION STABILITY VALUES</h4>
+                        
+                        <div class="spec-stat">
+                            <span>GRID LATENCY INDEX</span>
+                            <span id="spec-val-1">98%</span>
+                            <div class="spec-bar"><div class="spec-bar-fill" id="spec-fill-1" style="width: 98%;"></div></div>
+                        </div>
+                        
+                        <div class="spec-stat">
+                            <span>TACTICAL COORD REQUIREMENT</span>
+                            <span id="spec-val-2">85%</span>
+                            <div class="spec-bar"><div class="spec-bar-fill" id="spec-fill-2" style="width: 85%;"></div></div>
+                        </div>
+
+                        <div class="spec-stat">
+                            <span>AUGMENT RECHARGES RATE</span>
+                            <span id="spec-val-3">70%</span>
+                            <div class="spec-bar"><div class="spec-bar-fill" id="spec-fill-3" style="width: 70%;"></div></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mode-action-row">
+                        <button class="btn btn-primary play-trigger-btn hover-sound">PLAY NOW</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gallery Lightbox Modal -->
+    <div class="lightbox-overlay" id="lightbox">
+        <button class="lightbox-close hover-sound" id="lightbox-close" aria-label="Close Lightbox"><i class="fa-solid fa-xmark"></i></button>
+        <button class="lightbox-nav prev hover-sound" id="lightbox-prev" aria-label="Previous Image"><i class="fa-solid fa-chevron-left"></i></button>
+        <div class="lightbox-content">
+            <img src="" alt="Zoomed Screenshot" class="lightbox-image" id="lightbox-image">
+            <p class="lightbox-caption" id="lightbox-caption">SCREENSHOT CAPTION</p>
+        </div>
+        <button class="lightbox-nav next hover-sound" id="lightbox-next" aria-label="Next Image"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+
+    <!-- Play Now / Download Game Launcher Modal -->
+    <div class="modal-overlay" id="play-modal-overlay">
+        <div class="play-modal glass-card animate-modal">
+            <button class="modal-close hover-sound" id="play-modal-close" aria-label="Close Modal"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="checkout-heading"><i class="fa-solid fa-cloud-arrow-down text-cyan"></i> DEPLOYMENT INTERFACE</h3>
+            <p class="play-modal-desc text-center">Select your destination coordinate nodes to initialize launcher binaries download.</p>
+            
+            <div class="platform-grid">
+                <button class="platform-card hover-sound" data-platform="PC Launcher">
+                    <i class="fa-brands fa-windows platform-icon"></i>
+                    <span>WINDOWS CLIENT</span>
+                </button>
+                <button class="platform-card hover-sound" data-platform="PlayStation 5">
+                    <i class="fa-brands fa-playstation platform-icon"></i>
+                    <span>PLAYSTATION 5</span>
+                </button>
+                <button class="platform-card hover-sound" data-platform="Xbox Series X">
+                    <i class="fa-brands fa-xbox platform-icon"></i>
+                    <span>XBOX SERIES X</span>
+                </button>
+                <button class="platform-card hover-sound" data-platform="Steam Node">
+                    <i class="fa-brands fa-steam platform-icon"></i>
+                    <span>STEAM CORE</span>
+                </button>
+            </div>
+
+            <!-- Launcher installation simulation block -->
+            <div class="install-simulation" id="install-simulation" style="display: none;">
+                <div class="install-status-row">
+                    <span id="install-status-text">INITIALIZING DOWNLOAD NODE...</span>
+                    <span id="install-percent">0%</span>
+                </div>
+                <div class="spec-bar"><div class="spec-bar-fill" id="install-bar-fill" style="width: 0%;"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trailer Video Lightbox Popup -->
+    <div class="modal-overlay" id="trailer-video-modal-overlay">
+        <div class="trailer-popup-modal glass-card animate-modal">
+            <button class="modal-close hover-sound" id="trailer-video-modal-close" aria-label="Close Modal"><i class="fa-solid fa-xmark"></i></button>
+            <div class="video-frame glow-border">
+                <iframe 
+                    id="lightbox-trailer-iframe"
+                    src="" 
+                    title="NEO-NEXUS Cinematic Trailer" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Thank You / Purchase / Contact Success Popup Overlay -->
+    <div class="success-overlay" id="success-popup">
+        <div class="success-card glass-card">
+            <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
+            <h3 class="success-title" id="success-title">TRANSACTION COMPLETED</h3>
+            <p class="success-message" id="success-msg">Neural link authorized. Your client has registered changes on the central grid database.</p>
+            <button class="btn btn-primary hover-sound" id="success-close-btn">DISMISS</button>
+        </div>
+    </div>
+
+    <!-- Futuristic Page Transition Overlay -->
+    <div class="page-transition-overlay" id="page-transition-overlay">
+        <div class="loader-hud">
+            <svg class="loader-ring" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" stroke="rgba(0, 240, 255, 0.05)" stroke-width="3" fill="none" />
+                <circle cx="50" cy="50" r="45" stroke="var(--neon-blue)" stroke-width="4" stroke-dasharray="283" stroke-dashoffset="180" fill="none" stroke-linecap="round" />
+            </svg>
+            <div class="loader-text font-mono">LOADING CORES...</div>
+        </div>
+    </div>
+
+</body>
+</html>
