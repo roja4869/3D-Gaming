@@ -1053,30 +1053,90 @@ function initCheckoutFlow() {
         });
     }
 
+    function submitCheckout(paymentMethod, paymentDetails = {}) {
+        let subtotal = 0;
+        cart.forEach(item => subtotal += item.price * item.qty);
+        const tax = subtotal * 0.05;
+        const total = subtotal + tax;
+
+        let triggerBtn = null;
+        let originalHtml = "";
+        if (paymentMethod === 'card') {
+            triggerBtn = document.getElementById("btn-submit-payment");
+        } else if (paymentMethod === 'paypal') {
+            triggerBtn = document.getElementById("paypal-submit");
+        } else if (paymentMethod === 'crypto') {
+            triggerBtn = document.getElementById("crypto-submit");
+        }
+
+        if (triggerBtn) {
+            triggerBtn.disabled = true;
+            originalHtml = triggerBtn.innerHTML;
+            triggerBtn.innerHTML = `PROCESSING... <i class="fa-solid fa-sync fa-spin"></i>`;
+        }
+
+        fetch('/api/checkout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                items: cart.map(item => ({
+                    id: item.id,
+                    name: item.name,
+                    price: item.price,
+                    qty: item.qty
+                })),
+                subtotal: parseFloat(subtotal.toFixed(2)),
+                tax: parseFloat(tax.toFixed(2)),
+                total: parseFloat(total.toFixed(2)),
+                paymentMethod,
+                paymentDetails
+            })
+        })
+        .then(res => res.json().then(data => ({ status: res.status, body: data })))
+        .then(({ status, body }) => {
+            if (status >= 400 || !body.success) {
+                throw new Error(body.error || 'Transaction matrix error');
+            }
+            triggerSuccessPopup(paymentMethod === 'card' ? "TRANSACTION COMPLETED" : (paymentMethod === 'paypal' ? "PAYPAL TRANSACTION INITIATED" : "TRANS-MATRIX DETECTED"), body.message);
+            closeCheckout();
+            clearCart();
+        })
+        .catch(err => {
+            triggerSuccessPopup("TRANSACTION FAILURE", err.message || "Failed to finalize neural payment link.");
+        })
+        .finally(() => {
+            if (triggerBtn) {
+                triggerBtn.disabled = false;
+                triggerBtn.innerHTML = originalHtml;
+            }
+        });
+    }
+
     if (paymentForm) {
         paymentForm.addEventListener("submit", (e) => {
             e.preventDefault();
-            triggerSuccessPopup("TRANSACTION COMPLETED", "Neural link authorized. Your cart has been verified and items assigned to your network ID.");
-            closeCheckout();
-            clearCart();
+            submitCheckout('card', {
+                number: ccNum.value,
+                name: ccName.value,
+                expiry: ccExp.value,
+                cvv: ccCvv.value
+            });
         });
     }
 
     const payPalSub = document.getElementById("paypal-submit");
     if (payPalSub) {
         payPalSub.addEventListener("click", () => {
-            triggerSuccessPopup("PAYPAL TRANSACTION INITIATED", "Verification tokens generated. Check your background terminal layers for payment confirmation.");
-            closeCheckout();
-            clearCart();
+            submitCheckout('paypal');
         });
     }
 
     const cryptoSub = document.getElementById("crypto-submit");
     if (cryptoSub) {
         cryptoSub.addEventListener("click", () => {
-            triggerSuccessPopup("TRANS-MATRIX DETECTED", "Awaiting confirmation of SOL/BTC block transfer on the Solana/Bitcoin blockchain ledger nodes.");
-            closeCheckout();
-            clearCart();
+            submitCheckout('crypto');
         });
     }
 
@@ -1161,8 +1221,41 @@ function initContactForm() {
         }
 
         if (isValid) {
-            triggerSuccessPopup("TRANSMISSION BROADCASTED", `Transmission securely sent to core node nexus-hq from operative ${username.value.toUpperCase()}.`);
-            form.reset();
+            const submitBtn = document.getElementById("btn-submit");
+            const originalText = submitBtn ? submitBtn.innerHTML : '';
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = `<span class="btn-glow"></span><span class="btn-text">TRANSMITTING...</span><i class="fa-solid fa-sync fa-spin"></i>`;
+            }
+
+            fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: username.value,
+                    email: email.value,
+                    message: message.value
+                })
+            })
+            .then(res => res.json().then(data => ({ status: res.status, body: data })))
+            .then(({ status, body }) => {
+                if (status >= 400 || !body.success) {
+                    throw new Error(body.error || 'Transmission protocol error');
+                }
+                triggerSuccessPopup("TRANSMISSION BROADCASTED", body.message || `Transmission securely sent.`);
+                form.reset();
+            })
+            .catch(err => {
+                triggerSuccessPopup("TRANSMISSION ERROR", err.message || "Failed to establish network upload link.");
+            })
+            .finally(() => {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                }
+            });
         } else {
             playSynthSound("click");
         }

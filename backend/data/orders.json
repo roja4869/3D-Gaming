@@ -1,0 +1,20 @@
+[
+    {
+        "id": "ord_1779860433547_zhmru",
+        "items": [
+            {
+                "id": "mouse",
+                "name": "Nexus RGB Mouse",
+                "price": 79,
+                "qty": 1
+            }
+        ],
+        "subtotal": 79,
+        "tax": 3.95,
+        "total": 82.95,
+        "paymentMethod": "card",
+        "timestamp": "2026-05-27T05:40:33.547Z",
+        "maskedCard": "•••• •••• •••• 3456",
+        "cardHolderName": "OPERATIVE SIGNATURE"
+    }
+]

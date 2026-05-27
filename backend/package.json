@@ -1,0 +1,24 @@
+{
+  "name": "3d-gaming",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roja4869/3D-Gaming.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/roja4869/3D-Gaming/issues"
+  },
+  "homepage": "https://github.com/roja4869/3D-Gaming#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
